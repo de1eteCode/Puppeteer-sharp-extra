@@ -13,7 +13,7 @@ public abstract class PuppeteerExtraPlugin
 
     public string Name { get; }
 
-    public virtual IReadOnlyCollection<PluginRequirements> Requirements { get; }
+    public virtual IReadOnlyCollection<PluginRequirements> Requirements { get; } = [];
 
     public virtual ICollection<PuppeteerExtraPlugin> GetDependencies() => [];
 
