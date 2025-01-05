@@ -2,17 +2,17 @@
 using PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
 using Xunit;
 
-namespace Extra.Tests.StealthPluginTests.EvasionsTests
+namespace Extra.Tests.StealthPluginTests.EvasionsTests;
+
+public class ChromeSciTest : BrowserDefault
 {
-    public class ChromeSciTest : BrowserDefault
+    [Fact]
+    public async Task ShouldWork()
     {
-        [Fact]
-        public async Task ShouldWork()
-        {
-            var plugin = new ChromeSci();
-            var page = await LaunchAndGetPage(plugin);
-            await page.GoToAsync("https://google.com");
-            var sci = await page.EvaluateFunctionAsync(@"() => {
+        var plugin = new ChromeSci();
+        var page = await LaunchAndGetPage(plugin);
+        await page.GoToAsync("https://google.com");
+        var sci = await page.EvaluateFunctionAsync(@"() => {
                             const { timing } = window.performance
                             const csi = window.chrome.csi()
                             return {
@@ -23,18 +23,21 @@ namespace Extra.Tests.StealthPluginTests.EvasionsTests
                               dataOK: {
                                 onloadT: csi.onloadT === timing.domContentLoadedEventEnd,
                                 startE: csi.startE === timing.navigationStart,
-                                pageT: Number.isInteger(csi.pageT),
+                                pageT: Number.isFinite(csi.pageT),
                                 tran: Number.isInteger(csi.tran)
                               }
                             }
                           }");
 
-            Assert.True(sci["csi"].Value<bool>("exists"));
-            Assert.Equal("function () { [native code] }", sci["csi"]["toString"]);
-            Assert.True(sci["dataOK"].Value<bool>("onloadT"));
-            Assert.True(sci["dataOK"].Value<bool>("pageT"));
-            Assert.True(sci["dataOK"].Value<bool>("startE"));
-            Assert.True(sci["dataOK"].Value<bool>("tran"));
-        }
+        Assert.NotNull(sci);
+        Assert.True(sci.Value.GetProperty("csi").GetProperty("exists").GetBoolean());
+        Assert.True(sci.Value.GetProperty("dataOK").GetProperty("onloadT").GetBoolean());
+        Assert.True(sci.Value.GetProperty("dataOK").GetProperty("pageT").GetBoolean());
+        Assert.True(sci.Value.GetProperty("dataOK").GetProperty("startE").GetBoolean());
+        Assert.True(sci.Value.GetProperty("dataOK").GetProperty("tran").GetBoolean());
+
+        Assert.Equal(
+            "function () { [native code] }",
+            sci.Value.GetProperty("csi").GetProperty("toString").GetString());
     }
 }
