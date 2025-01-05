@@ -1,8 +1,12 @@
 # PuppeteerExtraSharp
 
-[![NuGet Badge](https://buildstats.info/nuget/PuppeteerExtraSharp)](https://www.nuget.org/packages/PuppeteerExtraSharp)
+Puppeteer extra sharp is a .NET port of the [Node.js library](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra)*
 
-Puppeteer extra sharp is a .NET port of the [Node.js library](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra)
+## Requirements
+
+- Only support dotnet 8, because in 'SourceUrl' plugin used [Harmony Thin](https://github.com/pardeike/Harmony) library
+  to hide '\_\_puppeteer\_evaluation\_script\_\_'. Thanks for [commit](https://github.com/hardkoded/puppeteer-sharp/commit/e8a8133b22f2fe4c754cc8abf5cc6d506f5c9fcc) ( ｡ •̀ ᴖ •́ ｡)
+
 ## Quickstart
 
 ```c#
@@ -34,20 +38,20 @@ await page.ScreenshotAsync("extra.png");
 🏴 [Puppeteer stealth plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/ExtraStealth)
 - Applies various evasion techniques to make detection of headless puppeteer harder.
 
-📃 [Puppeteer anonymize UA plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/AnonymizeUa) 
+📃 [Puppeteer anonymize UA plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/AnonymizeUa)
 - Anonymizes the user-agent on all pages.
 
-💀[Puppeteer recaptcha plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/Recaptcha) 
-- Solves recaptcha automatically 
+💀[Puppeteer recaptcha plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/Recaptcha)
+- Solves recaptcha automatically
 
 
 
-✋**More plugins will be soon** 
+✋**More plugins will be soon**
 ## API
 
 #### Use(IPuppeteerExtraPlugin)
 
-Adds a new plugin to plugins list and register it. 
+Adds a new plugin to plugins list and register it.
 - Returns the same instance of puppeteer extra
 - Parameters: instance of IPuppeteerExtraPlugin interface
 ```c# 
@@ -73,3 +77,5 @@ var browser = new PuppeteerExtra().ConnectAsync(new ConnectOptions());
 ```c# 
 var stealthPlugin = puppeteerExtra.GetPlugin<StealthPlugin>();
 ```
+
+<span style="font-size: 10px">*almost</span>
