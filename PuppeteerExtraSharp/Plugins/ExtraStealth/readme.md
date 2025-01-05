@@ -36,12 +36,6 @@ var stealthHardwareConcurrencyOptions = new StealthHardwareConcurrencyOptions(co
 var vendor = "Google Inc."; // your custom navigator.vendor
 var stealthVendorSettings = new StealthVendorSettings(vendor);
 ```
-### Languages
-```c#
-var languages = "en-US"; // your custom languages array
-var languagesSettings = new StealthLanguagesOptions(languages);
-```
-
 ### WebGL
 ```c#
 var webGLVendor = "Intel Inc."; // your custom webGL vendor
