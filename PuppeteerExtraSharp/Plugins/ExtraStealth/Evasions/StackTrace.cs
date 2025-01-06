@@ -9,7 +9,7 @@ public class StackTrace : PuppeteerExtraPlugin
     {
     }
 
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("Stacktrace.js");
         await page.EvaluateFunctionOnNewDocumentAsync(script);

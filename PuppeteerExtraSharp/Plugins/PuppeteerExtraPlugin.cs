@@ -41,15 +41,11 @@ public abstract class PuppeteerExtraPlugin
     {
     }
 
-    public virtual Task OnPageCreated(IPage page) => Task.CompletedTask;
+    public virtual Task OnPageCreatedAsync(IPage page) => Task.CompletedTask;
 
-    public virtual void OnTargetChanged(Target target)
-    {
-    }
+    public virtual Task OnTargetChangedAsync(Target target) => Task.CompletedTask;
 
-    public virtual void OnTargetDestroyed(Target target)
-    {
-    }
+    public virtual Task OnTargetDestroyedAsync(Target target) => Task.CompletedTask;
 
     public virtual void OnDisconnected()
     {

@@ -9,7 +9,7 @@ public class OutDimensions : PuppeteerExtraPlugin
     {
     }
 
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("Outdimensions.js");
         await page.EvaluateFunctionOnNewDocumentAsync(script);

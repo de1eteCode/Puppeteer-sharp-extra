@@ -28,15 +28,15 @@ public class ChromeAppTest : BrowserDefault
 
         var installState = await page.EvaluateExpressionAsync<JsonObject>("chrome.app.InstallState");
         Assert.NotNull(installState);
-        Assert.Equal("disabled", installState["DISABLED"].GetValue<string>());
-        Assert.Equal("installed", installState["INSTALLED"].GetValue<string>());
-        Assert.Equal("not_installed", installState["NOT_INSTALLED"].GetValue<string>());
+        Assert.Equal("disabled", installState["DISABLED"]?.GetValue<string>());
+        Assert.Equal("installed", installState["INSTALLED"]?.GetValue<string>());
+        Assert.Equal("not_installed", installState["NOT_INSTALLED"]?.GetValue<string>());
 
         var runningState = await page.EvaluateExpressionAsync<JsonObject>("chrome.app.RunningState");
         Assert.NotNull(runningState);
-        Assert.Equal("cannot_run", runningState["CANNOT_RUN"].GetValue<string>());
-        Assert.Equal("ready_to_run", runningState["READY_TO_RUN"].GetValue<string>());
-        Assert.Equal("running", runningState["RUNNING"].GetValue<string>());
+        Assert.Equal("cannot_run", runningState["CANNOT_RUN"]?.GetValue<string>());
+        Assert.Equal("ready_to_run", runningState["READY_TO_RUN"]?.GetValue<string>());
+        Assert.Equal("running", runningState["RUNNING"]?.GetValue<string>());
 
         var details = await page.EvaluateExpressionAsync<object>("chrome.app.getDetails()");
         Assert.Null(details);

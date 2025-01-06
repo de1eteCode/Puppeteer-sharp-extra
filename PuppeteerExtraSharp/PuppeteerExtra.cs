@@ -25,7 +25,7 @@ public class PuppeteerExtra
 
     public async Task<IBrowser> LaunchAsync(
         LaunchOptions options,
-        ILoggerFactory loggerFactory = null)
+        ILoggerFactory? loggerFactory = null)
     {
         _plugins.ForEach(e => e.BeforeLaunch(options));
 
@@ -46,7 +46,7 @@ public class PuppeteerExtra
 
     public async Task<IBrowser> ConnectAsync(
         ConnectOptions options,
-        ILoggerFactory loggerFactory = null)
+        ILoggerFactory? loggerFactory = null)
     {
         _plugins.ForEach(e => e.BeforeConnect(options));
 
@@ -138,17 +138,20 @@ public class PuppeteerExtra
             {
                 var page = await args.Target.PageAsync();
 
-                _plugins.ForEach(async e => await e.OnPageCreated(page));
+                foreach (var plugin in _plugins)
+                {
+                    await plugin.OnPageCreatedAsync(page);
+                }
             }
         };
 
         foreach (var puppeteerExtraPlugin in _plugins)
         {
-            browser.TargetChanged += (sender, args)
-                => puppeteerExtraPlugin.OnTargetChanged(args.Target);
+            browser.TargetChanged += async (sender, args)
+                => await puppeteerExtraPlugin.OnTargetChangedAsync(args.Target);
 
-            browser.TargetDestroyed += (sender, args)
-                => puppeteerExtraPlugin.OnTargetDestroyed(args.Target);
+            browser.TargetDestroyed += async (sender, args)
+                => await puppeteerExtraPlugin.OnTargetDestroyedAsync(args.Target);
 
             browser.Disconnected += (sender, args) => puppeteerExtraPlugin.OnDisconnected();
 
@@ -156,7 +159,7 @@ public class PuppeteerExtra
 
             foreach (var page in pages)
             {
-                await puppeteerExtraPlugin.OnPageCreated(page);
+                await puppeteerExtraPlugin.OnPageCreatedAsync(page);
             }
         }
     }

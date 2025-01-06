@@ -6,13 +6,11 @@ namespace PuppeteerExtraSharp.Plugins.BlockResources;
 
 public class BlockRule
 {
-    public string SitePattern;
-    public IPage IPage;
-    public HashSet<ResourceType> ResourceType = [];
+    public string? SitePattern { get; set; }
 
-    internal BlockRule()
-    {
-    }
+    public IPage? IPage { get; set; }
+
+    public HashSet<ResourceType> ResourceType = [];
 
     public bool IsRequestBlocked(IPage fromPage, IRequest request)
     {
@@ -30,7 +28,9 @@ public class BlockRule
 
     public bool IsSiteBlocked(string siteUrl)
     {
-        return !string.IsNullOrWhiteSpace(SitePattern) && Regex.IsMatch(siteUrl, SitePattern);
+        return SitePattern != null &&
+               !string.IsNullOrWhiteSpace(SitePattern) &&
+               Regex.IsMatch(siteUrl, SitePattern);
     }
 
     public bool IsResourcesBlocked(ResourceType resource)

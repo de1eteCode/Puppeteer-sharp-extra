@@ -10,7 +10,7 @@ public class WebDriver : PuppeteerExtraPlugin
     {
     }
 
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("WebDriver.js");
         await page.EvaluateFunctionOnNewDocumentAsync(script);

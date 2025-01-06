@@ -9,7 +9,7 @@ public class LoadTimes : PuppeteerExtraPlugin
     {
     }
 
-    public override Task OnPageCreated(IPage page)
+    public override Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("LoadTimes.js");
         return Utils.EvaluateOnNewPage(page, script);

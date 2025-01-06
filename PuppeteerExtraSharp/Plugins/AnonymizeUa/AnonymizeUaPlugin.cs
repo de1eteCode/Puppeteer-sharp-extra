@@ -11,14 +11,14 @@ public class AnonymizeUaPlugin : PuppeteerExtraPlugin
     {
     }
 
-    private Func<string, string> _customAction;
+    private Func<string, string>? _customAction;
 
     public void CustomizeUa(Func<string, string> uaAction)
     {
         _customAction = uaAction;
     }
 
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         var ua = await page.Browser.GetUserAgentAsync();
         ua = ua.Replace("HeadlessChrome", "Chrome");

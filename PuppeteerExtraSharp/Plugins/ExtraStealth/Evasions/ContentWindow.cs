@@ -15,7 +15,7 @@ public class ContentWindow : PuppeteerExtraPlugin
         PluginRequirements.RunLast
     ];
 
-    public override Task OnPageCreated(IPage page)
+    public override Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("ContentWindow.js");
         return Utils.EvaluateOnNewPage(page, script);

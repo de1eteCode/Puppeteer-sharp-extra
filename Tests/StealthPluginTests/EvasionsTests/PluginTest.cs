@@ -17,7 +17,7 @@ public class PluginTest : BrowserDefault
 
         var finger = await new FingerPrint().GetFingerPrint(page);
 
-        Assert.Equal(5, finger["plugins"].AsArray().Count);
-        Assert.Equal(2, finger["mimeTypes"].AsArray().Count);
+        Assert.Equal(5, finger["plugins"]?.AsArray().Count);
+        Assert.Equal(2, finger["mimeTypes"]?.AsArray().Count);
     }
 }

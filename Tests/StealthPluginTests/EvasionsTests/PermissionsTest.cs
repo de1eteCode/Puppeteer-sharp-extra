@@ -10,7 +10,7 @@ public class PermissionsTest : BrowserDefault
     [Fact]
     public async Task ShouldBeDeniedInHttpSite()
     {
-        var launchOptions = CreateDefaultOptions();
+        var launchOptions = await CreateDefaultOptionsAsync();
         launchOptions.Args =
         [
             "--disable-features=HttpsUpgrades"
@@ -23,7 +23,7 @@ public class PermissionsTest : BrowserDefault
         var finger = await new FingerPrint().GetFingerPrint(page);
 
         Assert.Equal("http://info.cern.ch/", page.Url);
-        Assert.Equal("denied", finger["permissions"]["state"].GetValue<string>());
-        Assert.Equal("denied", finger["permissions"]["permission"].GetValue<string>());
+        Assert.Equal("denied", finger["permissions"]?["state"]?.GetValue<string>());
+        Assert.Equal("denied", finger["permissions"]?["permission"]?.GetValue<string>());
     }
 }

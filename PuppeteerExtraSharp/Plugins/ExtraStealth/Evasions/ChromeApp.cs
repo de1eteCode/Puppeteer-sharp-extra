@@ -12,7 +12,7 @@ public class ChromeApp : PuppeteerExtraPlugin
     {
     }
 
-    public override Task OnPageCreated(IPage page)
+    public override Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("ChromeApp.js");
         return Utils.EvaluateOnNewPage(page, script);

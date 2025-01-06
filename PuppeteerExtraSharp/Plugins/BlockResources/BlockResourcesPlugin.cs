@@ -10,7 +10,7 @@ public class BlockResourcesPlugin : PuppeteerExtraPlugin
 {
     public readonly List<BlockRule> BlockResources = [];
 
-    public BlockResourcesPlugin(IEnumerable<ResourceType> blockResources = null)
+    public BlockResourcesPlugin(IEnumerable<ResourceType>? blockResources = null)
         : base("block-resources")
     {
         if (blockResources != null)
@@ -34,7 +34,7 @@ public class BlockResourcesPlugin : PuppeteerExtraPlugin
         return this;
     }
 
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         await page.SetRequestInterceptionAsync(true);
         page.Request += (sender, args) => OnPageRequest(page, args);

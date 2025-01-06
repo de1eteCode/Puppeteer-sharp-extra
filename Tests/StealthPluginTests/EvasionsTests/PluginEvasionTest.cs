@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Extra.Tests.Utils;
 using PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
 using Xunit;
@@ -18,7 +17,7 @@ public class PluginEvasionTest : BrowserDefault
 
         var fingerPrint = await new FingerPrint().GetFingerPrint(page);
 
-        Assert.Equal(5, fingerPrint["plugins"].AsArray().Count);
-        Assert.Equal(2, fingerPrint["mimeTypes"].AsArray().Count);
+        Assert.Equal(5, fingerPrint["plugins"]?.AsArray().Count);
+        Assert.Equal(2, fingerPrint["mimeTypes"]?.AsArray().Count);
     }
 }

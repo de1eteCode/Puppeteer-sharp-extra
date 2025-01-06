@@ -8,18 +8,12 @@ namespace PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
 
 public class UserAgent : PuppeteerExtraPlugin
 {
-    private bool _isHeadless = false;
 
     public UserAgent() : base("stealth-userAgent")
     {
     }
 
-    public override void BeforeLaunch(LaunchOptions options)
-    {
-        _isHeadless = options.Headless;
-    }
-
-    public override async Task OnPageCreated(IPage page)
+    public override async Task OnPageCreatedAsync(IPage page)
     {
         var ua = await page.Browser.GetUserAgentAsync();
         ua = ua.Replace("HeadlessChrome/", "Chrome/");
@@ -51,13 +45,6 @@ public class UserAgent : PuppeteerExtraPlugin
                 Mobile = isMobile
             }
         };
-        //
-        // if (this._isHeadless)
-        // {
-        //     var dynamicObject = overrideObject as dynamic;
-        //     dynamicObject.AcceptLanguage = "en-US, en";
-        //     overrideObject = dynamicObject;
-        // }
 
         await page.Client.SendAsync("Network.setUserAgentOverride", overrideObject);
     }
@@ -184,26 +171,26 @@ public class UserAgent : PuppeteerExtraPlugin
 
     private class OverrideUserAgent
     {
-        public string UserAgent { get; set; }
-        public string Platform { get; set; }
-        public string AcceptLanguage { get; set; }
-        public UserAgentMetadata UserAgentMetadata { get; set; }
+        public string? UserAgent { get; set; }
+        public string? Platform { get; set; }
+        public string? AcceptLanguage { get; set; }
+        public UserAgentMetadata? UserAgentMetadata { get; set; }
     }
 
     private class UserAgentMetadata
     {
-        public List<UserAgentBrand> Brands { get; set; }
-        public string FullVersion { get; set; }
-        public string Platform { get; set; }
-        public string PlatformVersion { get; set; }
-        public string Architecture { get; set; }
-        public string Model { get; set; }
+        public List<UserAgentBrand>? Brands { get; set; }
+        public string? FullVersion { get; set; }
+        public string? Platform { get; set; }
+        public string? PlatformVersion { get; set; }
+        public string? Architecture { get; set; }
+        public string? Model { get; set; }
         public bool Mobile { get; set; }
     }
 
     private class UserAgentBrand
     {
-        public string Brand { get; set; }
-        public string Version { get; set; }
+        public string? Brand { get; set; }
+        public string? Version { get; set; }
     }
 }

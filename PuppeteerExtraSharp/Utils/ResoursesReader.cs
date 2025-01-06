@@ -5,7 +5,7 @@ namespace PuppeteerExtraSharp.Utils;
 
 internal static class ResourcesReader
 {
-    public static string ReadFile(string path, Assembly customAssemly = null)
+    public static string ReadFile(string path, Assembly? customAssemly = null)
     {
         var assembly = customAssemly ?? Assembly.GetExecutingAssembly();
         using var stream = assembly.GetManifestResourceStream(path);

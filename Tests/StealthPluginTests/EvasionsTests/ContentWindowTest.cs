@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Extra.Tests.Utils;
 using PuppeteerExtraSharp.Plugins.ExtraStealth;
 using Xunit;
@@ -18,7 +17,7 @@ public class ContentWindowTest : BrowserDefault
 
         var finger = await new FingerPrint().GetFingerPrint(page);
 
-        Assert.Equal("object", finger["iframeChrome"].GetValue<string>());
+        Assert.Equal("object", finger["iframeChrome"]?.GetValue<string>());
     }
 
     [Fact]

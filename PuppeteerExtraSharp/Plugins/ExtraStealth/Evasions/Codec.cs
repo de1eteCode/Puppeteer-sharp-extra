@@ -9,7 +9,7 @@ public class Codec : PuppeteerExtraPlugin
     {
     }
 
-    public override Task OnPageCreated(IPage page)
+    public override Task OnPageCreatedAsync(IPage page)
     {
         var script = Utils.GetScript("Codec.js");
         return Utils.EvaluateOnNewPage(page, script);
