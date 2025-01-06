@@ -43,6 +43,24 @@ public abstract class BrowserDefault : IDisposable
         return browser;
     }
 
+    protected async Task<IBrowser> LaunchWithPluginsAsync(
+        LaunchOptions? options = null,
+        params PuppeteerExtraPlugin[] plugins)
+    {
+        var extra = new PuppeteerExtra();
+
+        foreach (var plugin in plugins)
+        {
+            extra.Use(plugin);
+        }
+        
+        options ??= await CreateDefaultOptionsAsync();
+
+        var browser = await extra.LaunchAsync(options);
+        _launchedBrowsers.Add(browser);
+        return browser;
+    }
+
     protected async Task<IPage> LaunchAndGetPage(
         PuppeteerExtraPlugin? plugin = null,
         LaunchOptions? options = null)

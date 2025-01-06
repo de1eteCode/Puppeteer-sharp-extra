@@ -41,10 +41,6 @@ await page.ScreenshotAsync("extra.png");
 📃 [Puppeteer anonymize UA plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/AnonymizeUa)
 - Anonymizes the user-agent on all pages.
 
-💀[Puppeteer recaptcha plugin](https://github.com/Overmiind/PuppeteerExtraSharp/tree/master/Plugins/Recaptcha)
-- Solves recaptcha automatically
-
-
 
 ✋**More plugins will be soon**
 ## API
